@@ -1,0 +1,219 @@
+/* line 17, ../../../../.rvm/gems/ruby-1.9.2-p320/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* line 22, ../../../../.rvm/gems/ruby-1.9.2-p320/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+html {
+  line-height: 1;
+}
+
+/* line 24, ../../../../.rvm/gems/ruby-1.9.2-p320/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+ol, ul {
+  list-style: none;
+}
+
+/* line 26, ../../../../.rvm/gems/ruby-1.9.2-p320/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 28, ../../../../.rvm/gems/ruby-1.9.2-p320/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+/* line 30, ../../../../.rvm/gems/ruby-1.9.2-p320/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q, blockquote {
+  quotes: none;
+}
+/* line 103, ../../../../.rvm/gems/ruby-1.9.2-p320/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+/* line 32, ../../../../.rvm/gems/ruby-1.9.2-p320/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+a img {
+  border: none;
+}
+
+/* line 116, ../../../../.rvm/gems/ruby-1.9.2-p320/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/reset/_utilities.scss */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {
+  display: block;
+}
+
+/* line 22, ../sass/ex.scss */
+body {
+  padding: 2em 0;
+  color: rgba(0, 0, 0, 0.82);
+  font: normal 100% Cambria, Georgia, serif;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+/* line 28, ../sass/ex.scss */
+body .container {
+  *zoom: 1;
+  padding-left: 3em;
+  padding-right: 3em;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-background-origin: content;
+  -moz-background-origin: content;
+  -ms-background-origin: content-box;
+  -o-background-origin: content-box;
+  background-origin: content-box;
+  -webkit-background-clip: content-box;
+  -moz-background-clip: content-box;
+  background-clip: content-box;
+}
+/* line 38, ../../../../.rvm/gems/ruby-1.9.2-p320/gems/compass-0.12.2/frameworks/compass/stylesheets/compass/utilities/general/_clearfix.scss */
+body .container:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+/* line 31, ../sass/ex.scss */
+body .container header {
+  width: 31.91489%;
+  float: left;
+  margin-right: 2.12766%;
+  display: inline;
+}
+/* line 32, ../sass/ex.scss */
+body .container header #logo {
+  width: 100%;
+  background: url("../img/logo-bg.png") no-repeat 50% 0;
+}
+/* line 35, ../sass/ex.scss */
+body .container header #logo a {
+  padding-top: 117px;
+  height: 162px;
+  display: block;
+  text-align: center;
+}
+/* line 46, ../sass/ex.scss */
+body .container header nav ul {
+  margin: 0 3em;
+  border-top: 1px solid #888583;
+}
+/* line 50, ../sass/ex.scss */
+body .container header nav ul li {
+  border-bottom: 1px solid #888583;
+}
+/* line 54, ../sass/ex.scss */
+body .container header nav a {
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  color: #890101;
+  font: bold 14px/1.2 "Book Antiqua", "Palatino Linotype", Georgia, serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 1em 0.5em 1em;
+}
+/* line 55, ../sass/ex.scss */
+body .container header nav a i {
+  font: normal 10px Baskerville, Garamond, Palatino, "Palatino Linotype", "Hoefler Text", "Times New Roman", serif;
+  display: block;
+  letter-spacing: 0.05em;
+}
+/* line 71, ../sass/ex.scss */
+body .container .content {
+  width: 65.95745%;
+  float: right;
+  margin-right: 0;
+  *margin-left: -20px;
+  display: inline;
+}
+/* line 74, ../sass/ex.scss */
+body .container .content .intro {
+  margin-top: 117px;
+}
+/* line 76, ../sass/ex.scss */
+body .container .content .intro h2 {
+  font: normal 2em "Hoefler Text", "Baskerville old face", Garamond, "Times New Roman", serif;
+  text-align: center;
+}
+/* line 82, ../sass/ex.scss */
+body .container .content .main h2 {
+  font-size: 1.4em;
+  text-transform: lowercase;
+  text-align: center;
+  margin: 0.75em 0 1em;
+}
+/* line 90, ../sass/ex.scss */
+body .container .content .main ol li {
+  width: 31.91489%;
+  float: left;
+  margin-right: 2.12766%;
+  display: inline;
+}
+/* line 184, ../../../../.rvm/gems/ruby-1.9.2-p320/gems/susy-1.0.8/sass/susy/_grid.scss */
+body .container .content .main ol li:nth-child(3n) {
+  float: right;
+  margin-right: 0;
+}
+/* line 95, ../sass/ex.scss */
+body .container .content .main img {
+  max-width: 100%;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+}
+
+@media (min-width: 400px) and (max-width: 600px) {
+  /* line 113, ../sass/ex.scss */
+  body .container header,
+  body .container .content {
+    display: block;
+    float: none;
+    width: auto;
+  }
+}
+@media (max-width: 400px) {
+  /* line 124, ../sass/ex.scss */
+  body .container header,
+  body .container .content {
+    display: block;
+    float: none;
+    width: auto;
+  }
+  /* line 133, ../sass/ex.scss */
+  body .container .content .main ol li {
+    width: 48.93617%;
+    float: left;
+    margin-right: 2.12766%;
+  }
+  /* line 251, ../../../../.rvm/gems/ruby-1.9.2-p320/gems/susy-1.0.8/sass/susy/_grid.scss */
+  body .container .content .main ol li:nth-child(3n) {
+    float: left;
+    margin-right: Infinity%;
+  }
+  /* line 184, ../../../../.rvm/gems/ruby-1.9.2-p320/gems/susy-1.0.8/sass/susy/_grid.scss */
+  body .container .content .main ol li:nth-child(2n) {
+    float: right;
+    margin-right: 0;
+  }
+}

@@ -1,0 +1,142 @@
+// ---------------------------------------------------------------------------
+// Imports
+
+@import "compass/reset";
+@import "susy";
+@import "compass/css3";
+
+// ---------------------------------------------------------------------------
+// Basic Grid
+
+$total-columns: 12;
+$column-width: 60px;
+$gutter-width: 20px;
+$grid-padding: 3em;
+
+$show-grid-backgrounds  : false;
+
+// Make it fluid!
+$container-style: fluid;
+//$container-width: 100%;
+
+body{ 
+	// background:#F7F3E8; 
+	padding: 2em 0;
+	color: rgba(0, 0, 0, 0.82);
+	font: normal 100% Cambria, Georgia, serif;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+	.container { 
+		@include container(12, 600px, 400px);
+		@include susy-grid-background; 
+		header {
+			#logo {
+				width: columns(12);
+				background: url('../img/logo-bg.png') no-repeat 50% 0;
+				a {
+					padding-top: 117px;
+					height: 162px;
+					display: block;
+					text-align: center;
+				}
+			}
+			//background: red;
+			@include span-columns(4,12);
+
+			nav {
+				ul {
+					//width: columns(10);
+					margin: 0 3em;
+					border-top: 1px solid #888583;
+					li {
+						border-bottom: 1px solid #888583;
+					}
+				}
+				a {
+					i {
+						font: normal 10px Baskerville, Garamond, Palatino, "Palatino Linotype", "Hoefler Text", "Times New Roman", serif;
+						display: block;
+						letter-spacing: 0.05em;
+					}
+					display: block;
+					text-decoration: none;
+					text-align: center;
+					color: #890101;
+					font: bold 14px/1.2 "Book Antiqua", "Palatino Linotype", Georgia, serif;
+					letter-spacing: 0.1em;
+					text-transform: uppercase;
+					padding: 1em 0.5em 1em;
+				}
+			}
+		}
+		.content {
+			//background: yellow;
+			@include span-columns(8 omega,12);
+			.intro {
+				margin-top: 117px;
+				h2 {
+					font: normal 2em "Hoefler Text", "Baskerville old face", Garamond, "Times New Roman", serif;
+					text-align: center;
+				}
+			}
+			.main {
+				h2 {
+					font-size: 1.4em;
+					text-transform: lowercase;
+					text-align: center;
+					margin: 0.75em 0 1em;
+				}
+
+				ol {
+					li {
+						@include span-columns(4,12);
+						@include nth-omega(3n);
+					}
+				}
+				img {
+					max-width: 100%;
+					@include border-radius(4px);
+				}
+			}
+		}
+	}
+}
+
+@include at-breakpoint(12){
+	body .container{
+		
+	}
+}
+
+@include at-breakpoint(400px 600px){
+	body .container{
+		header,
+		.content {
+			display: block;
+			float: none;
+			width: auto;
+		}
+	}
+}
+
+@include at-breakpoint(0 400px){
+	body .container{
+		header,
+		.content {
+			display: block;
+			float: none;
+			width: auto;
+		}
+
+		.content {
+			.main {
+				ol {
+					li {
+						@include span-columns(6,12);
+						@include remove-nth-omega(3n); 
+						@include nth-omega(2n);
+					}
+				}
+			}
+		}
+	}
+}

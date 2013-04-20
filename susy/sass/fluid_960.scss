@@ -1,0 +1,31 @@
+// ---------------------------------------------------------------------------
+// Imports
+
+@import "susy";
+
+// ---------------------------------------------------------------------------
+// Basic Grid
+
+$total-columns: 12;
+$column-width: 60px;
+$gutter-width: 20px;
+$grid-padding: 10px;
+
+$show-grid-backgrounds  : true;
+
+// Make it fluid!
+$container-style: fluid;
+$container-width: 60%;
+
+body{ 
+	// background:#F7F3E8; 
+	.fluid-container { 
+		@include container();
+		@include susy-grid-background; 
+		.item {
+			background: red;
+			@include span-columns(3,12);
+			@include nth-omega(4n);
+		}
+	}
+}
