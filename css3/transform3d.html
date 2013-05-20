@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Transform 3D</title>
+		<style>
+			#container {
+				-webkit-perspective: 1000;
+				position: absolute;
+				top: 50;
+				left: 50;
+				width: 500px;
+				height: 500px;
+			}
+
+			#cube {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				-webkit-transform: rotate3d(0, 0, 0, 90deg) translate3d(0,0,-250px);
+				-webkit-transform-style: preserve-3d;
+				z-index: 1;
+				-webkit-transform-origin: 50% 50% -250px;
+				-webkit-transition: -webkit-transform .6s;
+			}
+
+			#cube > div {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				overflow: hidden;
+				height: 100%;
+				position: absolute;
+				-webkit-user-select: none;
+				-webkit-background-size: cover;
+				text-align: center;
+				font-weight: 100;
+				text-shadow: 0 -2px 0 rgba(0,0,0,0.2);
+				line-height: 1.5;
+				margin: 0;
+				padding: 0;
+			}
+
+			#aspect-1 {
+				width: 100%;
+				height: 100%;
+				background: red;
+				-webkit-transform: rotate3d(0, 0, 0, 0deg) translate3d(0px, 0px, 250px);
+			}
+
+			#aspect-2 {
+				width: 100%;
+				height: 100%;
+				background: blue;
+				-webkit-transform: rotate3d(1, 0, 0, -90deg) translate3d(0px, 0px, 250px);
+			}
+
+			#aspect-3 {
+				width: 100%;
+				height: 100%;
+				background: yellow;
+				-webkit-transform: rotate3d(1, 0, 0, 180deg) translate3d(0px, 0px, 250px);
+			}
+
+			#aspect-4 {
+				width: 100%;
+				height: 100%;
+				background: green;
+				-webkit-transform: rotate3d(1, 0, 0, 90deg) translate3d(0px, 0px, 250px);
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<div id="cube">
+				<div id="aspect-1"></div>
+				<div id="aspect-2"></div>
+				<div id="aspect-3"></div>
+				<div id="aspect-4"></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		function $(id) {
+			return document.getElementById(id);
+		}
+
+		window.onload = function() {
+			var cube = $('cube'),
+				index = 0;
+
+			window.addEventListener('click', function() {
+				cube.style.webkitTransform = 'rotate3d(1, 0, 0, ' + (90 * (++index)) + 'deg) translate3d(0,0,-250px)'
+			}, false);
+		}
+	</script>
+</html>
