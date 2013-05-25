@@ -1,0 +1,524 @@
+<!--*
+ * HTML 5 Video sub region copies to Canvas Example
+ *
+ * This sample demonstrates how to copy sub region pixel data from a HTML 5
+ * video element to a HTML 5 Canvas to demostrate how a 5x4 Video Mosaic can
+ * be cut up and presented on the screen, and then transformed in 3D using
+ * CSS 3D Transformations and Animations.
+ *
+ * Please note, this example is designed to work only in either Google Chrome
+ * or the Chromium web browsers.
+ *
+ * Authored By Joel Summerfield: jsummerfield@aminocom.com
+ *
+ *-->
+ 
+<html>
+    <head>
+        <title>Video on Canvas Experiment</title>
+    </head>
+    <style type="text/css">
+        body {
+            background:#000000 no-repeat;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        div {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 1240px;
+            height: 150px;
+            -webkit-perspective: 2000px;             
+            -webkit-perspective-origin: 50% 50%;  
+        }
+        
+        canvas {
+        	position: absolute;
+        	margin: 0px;
+        	padding: 0px;
+            z-index:20;
+        }
+        
+        @-webkit-keyframes flipDown-in {
+        	0% { -webkit-transform: rotateX(90deg); opacity: 1.0}
+        	100% { -webkit-transform: rotateX(0deg); opacity: 1.0}
+    	}
+        
+        
+        @-webkit-keyframes flipDown-out {
+        	0% { -webkit-transform: rotateX(0deg); opacity: 1.0}
+        	100% { -webkit-transform: rotateX(-90deg); opacity: 1.0}
+    	}
+    	
+    	@-webkit-keyframes flipUp-out {
+        	from { -webkit-transform: rotateX(0deg); opacity: 1.0}
+        	to { -webkit-transform: rotateX(90deg); opacity: 1.0}
+    	}
+    	
+    	@-webkit-keyframes flipUp-in {
+        	from { -webkit-transform: rotateX(-90deg); opacity: 1.0}
+        	to { -webkit-transform: rotateX(0deg); opacity: 1.0}
+    	}
+
+    </style>
+    <script type="text/JavaScript">
+    
+    	/* Global Varibles */
+
+		// General
+        var interval_id = 0;		// Interval ID for the Drawing loop
+        var animating = false;		// Flag to track the current state of Animations
+        var interval_time = 50;     // Interval between updates (33 = 30 re-draws per second, or 30FPS)
+
+		// Objects
+		var source_video;			// Video source
+		var source_image;			// Image source
+		var source;					// Source object for sub-region copies.
+
+        var copy_canvas;            // A Canvas to hold a single frame. So each request for a video frame
+                                    // results in a full scence copy of the video frame to the canvas.
+                                    // As coping canvas->canvas is faster in webkit, sub regions are instead
+                                    // copied from the copy canvase rather than the video
+        var copy_canvas_context;
+		
+		// Image and Video Source array.
+		var sources_index = 0;
+		var sources = [["videos/bigbuckbunny-mosaic-5x4-1080p.mp4", "images/bigbuckbunny-mosaic-5x4-1080p.png"]];
+		
+		// Collections Variables
+		var elements = new Array();		// Array of Element Objects
+		var focus_element_index = 0;	// The index in the Array of the current focused Element
+		
+		//Mosaic Video Vars
+		var pip_rows = 4;		// The Number of Rows in the Mosaic
+		var pip_columns = 5;	// The Number of Columns in the Mosaic
+		var pip_w = 384;		// The Width of 1 Mosaic Tile
+		var pip_h = 270;		// The Height of 1 Mosaic Tile
+		
+		/* Classes/Objects */
+		
+		function Element(parent, id, x, y, w, h, v){
+		
+			this.parent = document.getElementById(parent);
+			
+			this.id = id;	// ID
+			
+			// Position
+			this.x = x;		// X Coordinate
+			this.y = y;		// Y Coordinate
+			this.w = w;		// Width
+			this.h = h;		// Height
+			
+			this.visible = v;	// Visibility flag
+			
+			this.margin_x = 10;	// X Margin between elements
+			this.margin_y = 10; // Y Margin between elements
+			
+			// Calculated Width and Height of Child elements
+			this.child_w = (this.w - ((pip_columns + 1) * this.margin_x)) / pip_columns;
+			this.child_h = (this.h - (2 * this.margin_y));
+			 
+			this.mosaic_y_offset = 0;
+			
+			this.focus_index = 0;
+			
+			this.set_focus_index = function(index) {
+        		if(index >= 0 && index < pip_columns) {
+        			this.focus_index = index;
+        		}
+        	}
+			
+            var toogle = false;
+
+			this.draw = function() {
+				//No need to draw if this element is not in use.
+				if (this.visible == true) {
+
+				    // Clear Contents
+				    copy_canvas_context.clearRect(0, 0, 1920, 1080);
+        	
+        			// Fill Background
+				    copy_canvas_context.fillStyle = "green";
+				    copy_canvas_context.fillRect(0, 0, 1920, 1080);
+
+                    copy_canvas_context.drawImage(source, 0, 0, 1920, 1080);
+
+				    // Clear Contents
+				    this.context.clearRect(0, 0, this.w, this.h);
+        	
+        			// Fill Background
+				    this.context.fillStyle = "red";
+				    this.context.fillRect(0, 0, this.w, this.h);
+		
+				    // Draw Border
+				    this.context.strokeStyle = "white";
+				    this.context.lineWidth = 4;
+ 					this.context.strokeRect(0, 0, this.w, this.h);
+ 					
+ 					// Render Children
+ 					for (var i = 0; i < pip_columns; i++) {
+ 					
+ 						// Calculate some per child variables
+ 						var sx = (i * pip_w);
+ 						var sy = (this.mosaic_y_offset * pip_h);
+ 						var dx = (this.margin_x + (i * (this.margin_x + this.child_w)));
+
+					    // Copy sub-region from Source, if source is defined
+					    if(copy_canvas) {
+		        			this.context.drawImage(copy_canvas, sx, sy, pip_w, pip_h, dx, this.margin_y, this.child_w, this.child_h);
+		        		}
+		        
+		       			// Draw Border
+        				this.context.strokeStyle = (i == this.focus_index) ? "red" : "white";
+					    this.context.lineWidth = 2;
+					    this.context.strokeRect(dx, this.margin_y, this.child_w, this.child_h);	
+ 					}
+ 				}
+			}
+			
+			this.on_key_down = function(key) {
+				console.log("Focus Index: " + focus_element_index);
+				var consumed = true;
+            	switch(key) {
+            	    case 37: //Left Arrow
+            			this.set_focus_index(this.focus_index - 1);
+            			break;
+            		case 39: //Right Arrow
+            			this.set_focus_index(this.focus_index + 1);
+            			break;
+            		default:
+            			consumed = false;
+            			break;
+            	}
+            	return consumed;
+            }
+		
+			this.init = function() {
+				this.canvas = document.createElement('canvas');
+				this.canvas.id = this.id;
+				this.canvas.style.top = this.y;
+				this.canvas.style.left = this.x;
+				this.canvas.width = this.w;
+				this.canvas.height = this.h;
+				this.canvas.style.webkitTransformOriginZ = -(this.h / 2);
+				
+				this.add();
+				
+				this.context = this.canvas.getContext("2d");
+			}
+			
+			this.add = function() {
+				this.parent.appendChild(this.canvas);
+			}
+			
+			this.remove = function() {
+				// Before removal, clear the canvas element
+				this.context.clearRect(0, 0, this.w, this.h);
+				this.parent.removeChild(this.canvas);
+			}
+			
+			this.init();
+		}
+		
+		/* Functions */
+        
+        var get_unused = function() {        	
+        	for(var i = 0; i < elements.length; i++) {
+        		if(elements[i].visible == false) {
+        			return i;
+        		}
+        	}
+        }
+                
+        var draw = function() {    
+        	//In this example, we only need to redraw the focus index.
+        	elements[focus_element_index].draw();
+        	
+        	// Loop through and call draw on all the child elements.
+        	/*for(var i = 0; i < elements.length; i++) {
+				elements[i].draw();
+        	}*/
+        }
+        
+        var scroll = function(offset, animation_in, animation_out) {
+        
+        	// Recycle an unused Element, and set it up to roll in..
+        	var new_focus_index = get_unused();
+            elements[new_focus_index].add();
+            elements[new_focus_index].focus_index = elements[focus_element_index].focus_index;
+           	elements[new_focus_index].mosaic_y_offset = offset;
+           	elements[new_focus_index].canvas.style.webkitAnimationName = animation_in;
+           	elements[new_focus_index].canvas.style.webkitAnimationDuration = "1s";
+           	elements[new_focus_index].canvas.style.webkitAnimationFillMode = "forwards";
+           	elements[new_focus_index].visible = true;
+            	    	
+           	// Set the current focused canvas to roll out
+            elements[focus_element_index].canvas.style.webkitAnimationName = animation_out;
+            elements[focus_element_index].canvas.style.webkitAnimationDuration = "1s";
+            elements[focus_element_index].canvas.style.webkitAnimationFillMode = "forwards";
+                		
+            // Update the index of the focused element
+            focus_element_index = new_focus_index;
+                		
+            // Hook into the animation events, so we can cleanup once the animation is complete.
+            elements[focus_element_index].canvas.addEventListener('webkitAnimationStart', on_animation_start, false);
+  			elements[focus_element_index].canvas.addEventListener('webkitAnimationEnd', on_animation_end, false);
+        }
+        
+        var set_sources = function(index) {
+        	// Make sure the new index is valid
+        	if (index >= 0 && index < sources.length) {
+        		
+        		// If Video is playing, stop it first.
+        		source_video.pause();
+        		
+        		// Start loading the image 
+        		source_image.src = sources[sources_index][1];
+        		
+        		// Set the Source to null
+        		source = null;
+        		
+        		// Finally, update the index with the new value.
+        		source_index = index;
+        	}
+        }
+        
+        var start_loop = function() {
+            // Start re-draw loop.
+            if (interval_id == 0) {
+        		interval_id = setInterval(draw, interval_time);
+        	}
+        }
+        
+        var stop_loop = function(){
+        	clearInterval(interval_id);
+       		interval_id = 0;
+        }
+		
+		/* Event Handlers */
+
+        window.onload = function (e) {
+            console.log("Window.OnLoad()");
+            
+            // Set Image Source and hook up event handlers.
+            source_image = document.getElementById('source-image');
+            source_image.addEventListener('load', image_on_load, false);
+            
+            // Set Video Source, and hook up event handlers.
+            source_video = document.getElementById('source-video');
+            source_video.addEventListener('progress', video_on_progress, false);
+            //source_video.addEventListener('buffered', video_on_buffered, false);
+            //source_video.addEventListener('readystatechanged', video_on_ready_state_changed, false);
+            source_video.addEventListener('canplay', video_on_can_play, false);
+            source_video.addEventListener('playing', video_on_play, false);
+           	source_video.addEventListener('paused', video_on_pause, false);            
+            source_video.addEventListener('ended', video_on_stop, false);    
+
+            // Set the Copy Canvas Vars
+            copy_canvas = document.getElementById('copy-canvas');
+			copy_canvas_context = copy_canvas.getContext("2d");
+
+			// Create Initial Elements, for this example I only need 2.
+  			elements[elements.length] = new Element('main', 'element0', 20, 20, 1240, 150, true);
+  			elements[elements.length] = new Element('main', 'element1', 20, 20, 1240, 150, false);
+        	
+            source_video.setAttribute("src", sources[sources_index][0]);
+            source_video.play();
+            //set_sources(sources_index);
+            
+        }
+        
+        var image_on_load = function() {
+        	console.log("ImageOnLoad()");
+        	
+        	// Switch the source to Image
+        	source = source_image;
+        	
+        	// Start the Drawing Loop
+        	start_loop();
+        	
+        	// Finally, start loading the video
+			source_video.setAttribute("src", sources[sources_index][0]);
+			//source_video.setAttribute("poster", sources[sources_index][1]);
+
+		    source_video.play();
+        }
+        
+        var video_on_progress = function() {
+            console.log("VideoOnProgress()");
+            
+            if(source_video.buffered){
+        		//Play the video
+				source_video.play();
+			}
+        }   
+        
+        var video_on_buffered = function() {
+            console.log("VideoOnBuffered()");
+
+            //Once the video is buffered, we can play.
+			source_video.play();
+        }
+
+        var video_on_ready_state_changed = function() {
+            console.log("VideoOnReadyStateChanged()");
+            
+            //Check if video has buffered
+            if(source_video.readyState == 4){
+        		//Play the video
+				source_video.play();
+			}
+        }   
+
+        var video_on_can_play = function() {
+            console.log("VideoOnCanPlay()");
+            
+            //Check if video has buffered
+            if(source_video.readyState == 4){
+
+        		//Play the video
+				source_video.play();
+			}
+        }   
+
+        var video_on_play = function() {
+            console.log("VideoOnPlay()");
+            
+            // Switch the source to Video
+            source = source_video;
+            
+            setTimeout(start_loop, 2000);
+        	// Start the Drawing Loop
+        	//start_loop();
+        }
+        
+        var video_on_pause = function() {
+            console.log("VideoOnPause()");
+            
+            // Stop redraw loop.
+        	stop_loop();
+        }
+        
+        var video_on_stop = function() {
+            console.log("VideoOnStop()");
+            
+            // Stop redraw loop.
+        	stop_loop();
+        }
+        
+        var on_animation_start = function(event) {
+            console.log("AnimationStart()");
+            
+            // Toggle animating flag
+        	animating = true;
+        }
+        
+        var on_animation_end = function(event) {
+            console.log("AnimationEnd()");
+            
+            // Unregister the event handlers.
+			elements[focus_element_index].canvas.removeEventListener('webkitAnimationStart', on_animation_start,false);
+			elements[focus_element_index].canvas.removeEventListener('webkitAnimationEnd', on_animation_end, false);
+
+			// Hide and remove all elements except the focus element
+			for(var i = 0; i < elements.length; i++) {
+			
+				// Skip the current focus element
+        		if(i == focus_element_index) {
+        			continue;
+        		}
+
+				// Free up
+        		elements[i].visible = false;
+        		elements[i].remove();
+        	}
+			
+			// Toggle animating flag
+        	animating = false;
+        }      
+        
+        var on_key_down = function(key) {
+        	console.log("OnKeyDown(): " + key);
+        	
+        	// Offer the Key first to the current element, and return if consumed.
+        	if(elements[focus_element_index].on_key_down(key)) {
+        		return;
+        	}
+
+            switch(key) {
+            	case 32: //Space Bar
+					source_video.pause();
+            		break;
+            	case 38: //Up Arrow
+            	    if(animating == false) {
+            	    	console.log("FlipUp()");
+            	    	
+            	    	// Calculate the new offset, and wrap if required.
+            	    	var offset = elements[focus_element_index].mosaic_y_offset - 1;
+            	    	if (offset < 0) {
+            	    		offset = (pip_rows - 1);
+            	    		
+            	    		// If there is more than 1 entry in the sources Array, then switch the video source as well
+            	    		if(sources.length > 1) {
+            	    		
+            	    			// Calculate the new index, and wrap value if required.
+            	    			sources_index -= 1;
+            	    			if(sources_index < 0) {
+            	    				sources_index = sources.length - 1;
+            	    			}
+            	    			console.log("Changing Source to " + sources_index)
+            	    			set_sources(sources_index);
+            	    		}
+            	    	}
+            	    	
+            	    	// Animate
+            	    	scroll(offset, "flipDown-in", "flipDown-out");
+                	}
+                	break;
+                case 40: //Down Arrow
+                	if(animating == false) {
+                	    console.log("FlipDown()");
+                	    
+                	    // Calculate the new offset, and wrap if required.
+                	    var offset = elements[focus_element_index].mosaic_y_offset + 1;
+            	    	if (offset >= pip_rows) {
+            	    		offset = 0;
+            	    		
+            	    		// If there is more than 1 entry in the sources Array, then switch the video source as well
+            	    		if(sources.length > 1) {
+            	    		
+            	    			// Calculate the new index, and wrap value if required.
+            	    			sources_index += 1;
+            	    			if(sources_index >= sources.length) {
+            	    				sources_index = 0;
+            	    			}
+            	    			console.log("Changing Source to " + sources_index)
+            	    			set_sources(sources_index);
+            	    		}
+            	    	}
+            	    	
+            	    	// Animate
+            	    	scroll(offset, "flipUp-in", "flipUp-out");
+                	}
+                    break;
+                default: //Everything Else
+                    break;
+            }
+        }
+
+    </script>
+    <body id="body" onkeydown="on_key_down(window.event.keyCode);">
+		<video id="source-video" loop="true" autoplay="false" width="1280px" height="720px" style="display:none">
+			Your browser does not support the video tag.
+		</video>
+    	<div style="display:none">
+			<img id="source-image" style="display:none">
+            <canvas id="copy-canvas" width="1920px" height="1080px">
+            </canvas>
+		</div>
+    	<div id="main">
+        </div>
+    </body>
+</html>
