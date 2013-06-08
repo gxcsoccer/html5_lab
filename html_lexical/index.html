@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script src="HtmlLexicalParser.js"></script>
+	</head>
+	<body>
+		<div>
+			<textarea cols="100" rows="20"></textarea>
+			<input type="button" value="OK" />
+		</div>
+
+		<svg width="640" height="480" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with SVG-edit - http://svg-edit.googlecode.com/ -->
+ <g>
+  <defs>
+   <marker orient="auto" markerHeight="6" markerWidth="8" markerUnits="strokeWidth" refY="5" refX="0" viewBox="-10 0 10 10" id="Triangle">
+    <polygon id="svg_1" fill="#007fff" points="-15,0 1,5 -15,10"/>
+   </marker>
+  </defs>
+  <title>Layer 1</title>
+  <ellipse ry="20" rx="20" id="dataState" cy="115" cx="145" stroke-width="0" stroke="#000000" fill="#007fff"/>
+  <ellipse id="tagOpenState" ry="20" rx="20" cy="253" cx="222" stroke-width="0" stroke="#000000" fill="#007fff"/>
+  <ellipse id="tagNameState" ry="20" rx="20" cy="227" cx="329" stroke-width="0" stroke="#000000" fill="#007fff"/>
+  <ellipse id="endTagOpenState" ry="20" rx="20" cy="167" cx="256" stroke-width="0" stroke="#000000" fill="#007fff"/>
+  <ellipse id="bogusCommentState" ry="20" rx="20" cy="286" cx="96" stroke-width="0" stroke="#000000" fill="#007fff"/>
+  <text xml:space="preserve" text-anchor="middle" font-family="Sans-serif" font-size="15" id="svg_6" y="121" x="140" stroke-linecap="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#000000">data</text>
+  <text xml:space="preserve" text-anchor="middle" font-family="Sans-serif" font-size="15" id="svg_7" y="259" x="224" stroke-linecap="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#000000">tagOpen</text>
+  <line marker-end="url(#Triangle)" stroke-width="2" transform="rotate(-4.66686 179.5 196)" id="svg_8" y2="236.40771" x2="202.00542" y1="155.59229" x1="156.99457" stroke-linecap="null" stroke-dasharray="null" fill="#007fff" stroke="#007fff"/>
+  <text fill="#000000" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="177" y="203" id="svg_2" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">&lt;</text>
+  <text fill="#000000" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="256" y="175" id="svg_4" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">endTagOpen</text>
+  <line marker-end="url(#Triangle)" stroke-width="2" transform="rotate(-124.439 240.5 209)" y2="232.47451" x2="254.01868" y1="185.52549" x1="226.98132" stroke-linecap="null" stroke-dasharray="null" fill="#007fff" id="svg_10" stroke="#007fff"/>
+  <text fill="#000000" stroke="#007fff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="245" y="220" id="svg_11" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">/</text>
+  <line marker-end="url(#Triangle)" stroke-width="2" transform="rotate(-74.5778 278 239)" y2="262.47451" x2="291.51868" y1="215.52549" x1="264.48132" stroke-linecap="null" stroke-dasharray="null" fill="#007fff" stroke="#007fff" id="svg_12"/>
+  <text fill="#000000" stroke="#007fff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="331" y="229" id="svg_13" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">tagName</text>
+  <text fill="#000000" stroke="#007fff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="288" y="261" id="svg_14" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">[leter]</text>
+  <text fill="#000000" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="100" y="295" id="svg_15" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">bogusComment</text>
+  <line marker-end="url(#Triangle)" stroke-width="2" transform="rotate(107.398 158 275.5)" y2="301.91986" x2="175.58989" y1="249.08014" x1="140.41009" stroke-linecap="null" stroke-dasharray="null" fill="#007fff" id="svg_16" stroke="#007fff"/>
+  <text fill="#000000" stroke="#007fff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="163" y="272" id="svg_17" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">?</text>
+  <line marker-end="url(#Triangle)" stroke-width="2" transform="rotate(-120.579 122 203.5)" y2="247.5101" x2="163.46106" y1="159.4899" x1="80.5389" stroke-linecap="null" stroke-dasharray="null" fill="#007fff" id="svg_18" stroke="#007fff"/>
+  <text fill="#000000" stroke="#007fff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="123" y="231" id="svg_19" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">&gt;</text>
+  <ellipse ry="20" rx="20" cy="98" cx="365" stroke-width="0" fill="#007fff" id="beforeAttributeNameState" stroke="#000000"/>
+  <line marker-end="url(#Triangle)" stroke-width="2" transform="rotate(154.695 200.055 142.506)" y2="163.72889" x2="217.93285" y1="121.28331" x1="182.17693" stroke-linecap="null" stroke-dasharray="null" fill="#007fff" id="svg_21" stroke="#007fff"/>
+  <text fill="#000000" stroke="#007fff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="206" y="156" id="svg_22" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">&gt;</text>
+  <line marker-end="url(#Triangle)" stroke-width="2" transform="rotate(-16.8214 299 195)" y2="218.47451" x2="312.51867" y1="171.52549" x1="285.48131" stroke-linecap="null" stroke-dasharray="null" fill="#007fff" stroke="#007fff" id="svg_23"/>
+  <text fill="#000000" stroke="#007fff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="300" y="200.39844" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve" id="svg_24">[leter]</text>
+  <line marker-end="url(#Triangle)" fill="none" stroke="#007fff" stroke-width="2" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x1="223" y1="181" x2="113" y2="276" id="svg_27"/>
+  <line id="svg_5" marker-end="url(#Triangle)" stroke-width="2" transform="rotate(149.671 231.5 184.5)" y2="256.7236" x2="269.72433" y1="112.2764" x1="193.27561" stroke-linecap="null" stroke-dasharray="null" fill="#007fff" stroke="#007fff"/>
+  <text fill="#000000" stroke="#007fff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="266" y="210" id="svg_9" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">&gt;</text>
+  <text fill="#000000" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="368" y="103" id="svg_20" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">beforeAttributeName</text>
+  <line marker-end="url(#Triangle)" fill="none" stroke="#007fff" stroke-width="2" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x1="338" y1="205" x2="359" y2="126" id="svg_25"/>
+  <ellipse id="selfClosingStartTagState" ry="20" rx="20" cy="177" cx="443" stroke-width="0" fill="#007fff" stroke="#000000"/>
+  <text xml:space="preserve" text-anchor="middle" font-family="Sans-serif" font-size="15" id="svg_28" y="183" x="448" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="0" stroke="#000000" fill="#000000" transform="rotate(46.9727 448 177.602)">selfClosingStartTag</text>
+  <line id="svg_30" y2="162" x2="351" y1="161" x1="351" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke="#000000" fill="none" marker-end="url(#Triangle)"/>
+  <line y2="165.5" x2="398.5" y1="244.5" x1="377.5" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke-width="2" stroke="#007fff" fill="none" marker-end="url(#Triangle)" id="svg_35" transform="rotate(58.921 388 205)"/>
+  <text fill="#000000" stroke="#007fff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="353" y="167" id="svg_26" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve" transform="rotate(7.96132 353 161.602)">[whitespace]</text>
+  <text fill="#000000" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="388" y="213" id="svg_29" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">/</text>
+  <ellipse ry="20" rx="20" cy="204" cx="559" stroke-width="0" fill="#007fff" stroke="#000000" id="attributeNameState"/>
+  <ellipse ry="20" rx="20" cy="358" cx="489" stroke-width="0" fill="#007fff" stroke="#000000" id="afterAttributeNameState"/>
+  <ellipse ry="20" rx="20" cy="294" cx="377" stroke-width="0" fill="#007fff" stroke="#000000" id="beforeAttributeValueState"/>
+  <text fill="#000000" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="558" y="208" id="svg_34" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">attributeName</text>
+  <line marker-end="url(#Triangle)" fill="none" stroke-width="2" stroke="#007fff" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x1="390" y1="110" x2="537" y2="186" id="svg_36"/>
+  <text id="svg_31" fill="#000000" stroke="#007fff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="492" y="164.40625" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">[leter]</text>
+  <line stroke-width="2" id="svg_37" y2="163" x2="417" y1="118" x1="377" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke="#007fff" fill="none" marker-end="url(#Triangle)"/>
+  <text stroke-width="0" fill="#000000" stroke="#000000" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="388" y="134" id="svg_38" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">/</text>
+  <line stroke-width="2" transform="rotate(3.91825 295.5 140.5)" id="svg_40" y2="125" x2="172" y1="156" x1="419" stroke-linecap="null" stroke-linejoin="null" stroke-dasharray="null" stroke="#007fff" fill="none" marker-end="url(#Triangle)"/>
+  <text fill="#000000" stroke="#007fff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="493" y="365" id="svg_41" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">afterAttributeName</text>
+  <text fill="#000000" stroke="#000000" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="375" y="303" id="svg_42" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">beforeAttributeValue</text>
+  <line marker-end="url(#Triangle)" stroke-width="2" transform="rotate(129.806 500 192)" y2="218.41986" x2="517.58989" y1="165.58014" x1="482.41009" stroke-linecap="null" stroke-dasharray="null" fill="#007fff" stroke="#007fff" id="svg_43"/>
+  <text fill="#000000" stroke="#007fff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="494" y="195" id="svg_44" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">/</text>
+  <line stroke="#007fff" marker-end="url(#Triangle)" stroke-width="2" transform="rotate(129.806 471 250.5)" y2="287.48246" x2="546.20656" y1="213.51753" x1="395.79346" stroke-linecap="null" stroke-dasharray="null" fill="#007fff" id="svg_45"/>
+  <text fill="#000000" stroke="#007fff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="445" y="261" id="svg_46" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">=</text>
+  <line marker-end="url(#Triangle)" stroke-width="2" transform="rotate(129.806 517.5 280)" y2="262.37482" x2="577.78983" y1="297.62513" x1="457.21016" stroke-linecap="null" stroke-dasharray="null" fill="#007fff" id="svg_47" stroke="#007fff"/>
+  <text fill="#000000" stroke="#007fff" stroke-width="0" stroke-dasharray="null" stroke-linejoin="null" stroke-linecap="null" x="527" y="274" id="svg_48" font-size="15" font-family="Sans-serif" text-anchor="middle" xml:space="preserve">[whitespace]</text>
+  <line marker-end="url(#Triangle)" stroke-width="2" transform="rotate(129.806 536 285.5)" y2="303.15003" x2="472.73457" y1="267.85015" x1="599.26556" stroke-linecap="null" stroke-dasharray="null" fill="#007fff" id="svg_49" stroke="#007fff"/>
+ </g>
+</svg>
+	</body>
+	<script type="text/javascript">
+		var textarea = document.querySelector('textarea'),
+			button = document.querySelector('input');
+
+		var visualizer = {
+	        current:null,
+	        visualize:function visualize(name)
+	        {
+	            if(name == "attributeValueDoubleQuotedState"
+	                || name == "attributeValueSingleQuotedState"
+	                || name == "attributeValueUnquotedState")
+	                name = "attributeValueState";
+	            if(this.current)
+	                this.current.style.fill = "#3F80CD";
+
+	            this.current = document.querySelector("#"+name);
+	            if(!this.current)
+	                console.log(name);
+	            this.current.style.fill = "red";
+	            
+	        }
+	    }
+
+		button.addEventListener('click', function() {
+			var parser = new HTMLLexicalParser(visualizer.visualize),
+				text = textarea.value,
+				i = 0;
+
+			function parse() {
+				if(i < text.length) {
+					setTimeout(function() {
+						parser.receiveInput(text.charAt(i++));
+						parse();
+					}, 1000)
+				}
+			}
+			
+			parse();
+		}, false);
+	</script>
+</html>
