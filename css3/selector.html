@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Selector</title>
+		<style>
+			
+			div.outer p { color: orange; }
+			div:not(.outer) p { color: green; }
+
+		</style>
+	</head>
+	<body>
+		<div class="outer">
+			<p>outer</p>
+			<div class="inner">
+				<p>inner</p>
+			</div>
+		</div>
+	</body>
+</html>
